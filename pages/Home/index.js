@@ -1,6 +1,6 @@
 import styles from './index.module.scss'
 
-const Index = () => {
+const Home = () => {
     return (
         <div className={styles.container}>
             <p className={styles.text}>Home</p>
@@ -8,4 +8,4 @@ const Index = () => {
     )
 }
 
-export default Index
+export default Home
