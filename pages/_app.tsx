@@ -1,22 +1,26 @@
 import App from "next/app";
 import type { AppContext, AppProps } from "next/app";
-import Head from 'next/head'
+import Head from "next/head";
 import { Layout, ILayoutProps } from "@/components/layout";
-import { ThemeProvider } from '@/store/theme'
+import { ThemeProvider } from "@/store/theme";
+import { UserAgentProvider } from "@/store/userAgent";
+import { getIsMobile } from '@/utils'
 import "../styles/globals.css";
 
-function MyApp(data: AppProps & ILayoutProps) {
-  const { Component, pageProps, navbarData, footerData } = data;
+function MyApp(data: AppProps & ILayoutProps & { isMobile: boolean }) {
+  const { Component, pageProps, navbarData, footerData, isMobile } = data;
   return (
     <>
       <Head>
-        <title>next 这是title信息</title>
+        <title>{isMobile ? '移动端' : 'PC端'} - Nextjs</title>
         <meta name="description" content="这是meta信息" />
       </Head>
       <ThemeProvider>
-        <Layout navbarData={navbarData} footerData={footerData}>
-          <Component {...pageProps} />
-        </Layout>
+        <UserAgentProvider>
+          <Layout navbarData={navbarData} footerData={footerData}>
+            <Component {...pageProps} isMobile={isMobile} />
+          </Layout>
+        </UserAgentProvider>
       </ThemeProvider>
     </>
   );
@@ -33,6 +37,7 @@ MyApp.getInitialProps = async (context: AppContext) => {
       siteNumber: "粤ICP备XXXXXXXX号-X",
       publicNumber: "粤公网安备 xxxxxxxxxxxxxx号",
     },
+    isMobile: getIsMobile(context)
   };
 };
 

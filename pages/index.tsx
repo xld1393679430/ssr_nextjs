@@ -8,6 +8,7 @@ import styles from "./index.module.scss";
 interface IProps {
   title: string;
   description: string;
+  isMobile: boolean;
   list: {
     label: string;
     info: string;
@@ -15,17 +16,16 @@ interface IProps {
   }[];
 }
 
-const Index: NextPage<IProps> = ({ title, description, list }) => {
-
-  const mainRef = useRef<HTMLDivElement>(null)
-  const { theme } = useContext(ThemeContext)
+const Index: NextPage<IProps> = ({ title, description, list, isMobile }) => {
+  const mainRef = useRef<HTMLDivElement>(null);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
-    mainRef.current?.classList.remove(styles.withAnimation)
+    mainRef.current?.classList.remove(styles.withAnimation);
     window.requestAnimationFrame(() => {
-      mainRef.current?.classList.add(styles.withAnimation)
-    })
-  }, [theme])
+      mainRef.current?.classList.add(styles.withAnimation);
+    });
+  }, [theme]);
 
   return (
     <div className={styles.container}>
@@ -34,6 +34,7 @@ const Index: NextPage<IProps> = ({ title, description, list }) => {
 
         <p className={styles.description}>{description}</p>
 
+        <p className={styles.description}>当前{isMobile ? "是" : "不是"}移动端</p>
         <p>
           <Link href="/image-view">
             <a>To Image</a>
