@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Link from "next/link";
 import styles from "./index.module.scss";
 
 interface IProps {
@@ -12,13 +13,18 @@ interface IProps {
 }
 
 const Index: NextPage<IProps> = ({ title, description, list }) => {
-  console.log(styles, "---styles");
   return (
     <div className={styles.container}>
       <main className={styles.main}>
         <h1 className={styles.title}>{title}</h1>
 
         <p className={styles.description}>{description}</p>
+
+        <p>
+        <Link href="/image-view">
+          <a>To Image</a>
+        </Link>
+        </p>
 
         <div className={styles.grid}>
           {list?.map((item, index) => {

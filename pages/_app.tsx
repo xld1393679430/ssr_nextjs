@@ -1,14 +1,24 @@
-import "../styles/globals.css";
 import App from "next/app";
 import type { AppContext, AppProps } from "next/app";
+import Head from 'next/head'
 import { Layout, ILayoutProps } from "@/components/layout";
+import { ThemeProvider } from '@/store/theme'
+import "../styles/globals.css";
 
 function MyApp(data: AppProps & ILayoutProps) {
   const { Component, pageProps, navbarData, footerData } = data;
   return (
-    <Layout navbarData={navbarData} footerData={footerData}>
-      <Component {...pageProps} />
-    </Layout>
+    <>
+      <Head>
+        <title>next 这是title信息</title>
+        <meta name="description" content="这是meta信息" />
+      </Head>
+      <ThemeProvider>
+        <Layout navbarData={navbarData} footerData={footerData}>
+          <Component {...pageProps} />
+        </Layout>
+      </ThemeProvider>
+    </>
   );
 }
 
