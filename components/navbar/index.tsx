@@ -10,9 +10,8 @@ export const NavBar: FC<INavBarProps> = () => {
   return (
     <div className={styles.navBar}>
       <Link href="/">
-        <a>Home</a>
+        <a>首页</a>
       </Link>
-
     </div>
   );
 };
