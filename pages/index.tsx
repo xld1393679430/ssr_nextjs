@@ -26,12 +26,12 @@ const Index: NextPage<IProps & IOtherProps, {}> = ({ title, description, list, i
   useEffect(() => {
     console.log(theme, typeof window, '----theme')
     mainRef.current?.classList.remove(styles.withAnimation);
-    window.requestAnimationFrame(() => {
-      mainRef.current?.classList.add(styles.withAnimation);
-    });
-    // setTimeout(() => {
+    // window.requestAnimationFrame(() => {
     //   mainRef.current?.classList.add(styles.withAnimation);
-    // })
+    // });
+    setTimeout(() => {
+      mainRef.current?.classList.add(styles.withAnimation);
+    })
   }, [theme]);
 
   return (
