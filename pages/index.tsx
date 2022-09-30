@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { memo, useContext, useEffect, useRef, useState } from "react";
 import type { NextPage } from "next";
 import Link from "next/link";
 import cName from "classnames";
@@ -8,7 +8,6 @@ import styles from "./index.module.scss";
 interface IProps {
   title: string;
   description: string;
-  isMobile: boolean;
   list: {
     label: string;
     info: string;
@@ -16,15 +15,23 @@ interface IProps {
   }[];
 }
 
-const Index: NextPage<IProps> = ({ title, description, list, isMobile }) => {
+interface IOtherProps {
+  isMobile: boolean
+}
+
+const Index: NextPage<IProps & IOtherProps, {}> = ({ title, description, list, isMobile }) => {
   const mainRef = useRef<HTMLDivElement>(null);
   const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
+    console.log(theme, typeof window, '----theme')
     mainRef.current?.classList.remove(styles.withAnimation);
     window.requestAnimationFrame(() => {
       mainRef.current?.classList.add(styles.withAnimation);
     });
+    // setTimeout(() => {
+    //   mainRef.current?.classList.add(styles.withAnimation);
+    // })
   }, [theme]);
 
   return (
